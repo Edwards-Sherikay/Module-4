@@ -1,0 +1,71 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Division Calculator");
+        Console.WriteLine("-------------------");
+
+        try
+        {
+            // Get user input
+            Console.Write("Enter the first number (dividend): ");
+            string input1 = Console.Readline();
+
+            Console.Write("Enter the first number (divisor): ");
+            string input2 = Console.ReadLine();
+
+            // Perform conversion and division
+            int result = DividendNumbers(input1, input2);
+
+            //Display result if no exceptions occurred
+            Console.WriteLine($"Result: {result}");
+        }
+        catch (FormationException)
+        {
+            Console.WriteLine("Error: Please enter valid integer numbers.");
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Error: Cannot divide by zero.");
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("Error: The number is too large or too small for an Int 32.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("\nThank you fornusing the Division Calculator!");
+        }
+}
+
+static int DivideNumbers(string num1, string num2)
+{
+    try
+    {
+        // Convert strings to integers
+        int dividend = Convert.ToInt32(num1);
+        int divisor = Convert.ToInt32(num2);
+
+        //Perform division
+        return dividend / divisor;
+    }
+    catch (FormatException ex)
+    {
+        throw new FormatException("Invalid number format.", ex);
+    }
+    catch (DivideByZeroException ex)
+    {
+        throw new DivideByZeroException("Division by zero is not allowed.", ex);
+    }
+    catch (OverflowException ex)
+    {
+        throw new OverflowException("Number is outside the valid range for Int32.",  ex);
+    }
+}
+}
